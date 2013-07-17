@@ -29,6 +29,8 @@ void MakeArrayBuffer(const FunctionCallbackInfo<Value>& args) {
   Local<ArrayBuffer> ab;
   uint32_t size = args[0]->Uint32Value();
 
+  CHECK_ARG(args, size < 0x3fffffff, "buffer size too large");
+
   if (size > UPPER_LIMIT) {
     void* data = size > 0 ? malloc(size) : NULL;
     if (data == NULL && size > 0)
@@ -52,6 +54,7 @@ void FreeCallback(Isolate* isolate,
   HandleScope scope(Isolate::GetCurrent());
   Local<ArrayBuffer> obj = PersistentToLocal<ArrayBuffer>(isolate, *p_obj);
   int len = obj->GetIndexedPropertiesExternalArrayDataLength();
+  fprintf(stderr, "DEBUG: %i\n", len);
   if (data != NULL && len > 0) {
     isolate->AdjustAmountOfExternalAllocatedMemory(-len);
     free(data);
