@@ -6,6 +6,8 @@
 
 #define UPPER_LIMIT 4096
 
+namespace basics {
+
 using v8::ArrayBuffer;
 using v8::FunctionCallbackInfo;
 using v8::FunctionTemplate;
@@ -16,8 +18,6 @@ using v8::Local;
 using v8::Object;
 using v8::String;
 using v8::Value;
-
-namespace basics {
 
 void FreeCallback(Isolate* isolate, Persistent<ArrayBuffer>* p_obj, void* arg);
 

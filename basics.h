@@ -24,11 +24,11 @@
   HandleScope scope(isolate);                                                 \
   do { } while (0)
 
+namespace basics {
+
 using v8::Isolate;
 using v8::Local;
 using v8::Persistent;
-
-namespace basics {
 
 
 static void FatalError(const char* location, const char* message) {
