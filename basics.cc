@@ -53,8 +53,7 @@ void FreeCallback(Isolate* isolate,
                   void* data) {
   HandleScope scope(Isolate::GetCurrent());
   Local<ArrayBuffer> obj = PersistentToLocal<ArrayBuffer>(isolate, *p_obj);
-  int len = obj->GetIndexedPropertiesExternalArrayDataLength();
-  fprintf(stderr, "DEBUG: %i\n", len);
+  size_t len = obj->ByteLength();
   if (data != NULL && len > 0) {
     isolate->AdjustAmountOfExternalAllocatedMemory(-len);
     free(data);
